@@ -16,7 +16,9 @@ defmodule Overpass.Mixfile do
 
   defp deps do
     [
-        {:httpoison, "~> 0.7.4"}
+        {:httpoison, "~> 0.7.4"},
+        {:sweet_xml, "~> 0.5.0"},
+        {:jsx, "~> 2.8"}
     ]
   end
 end
