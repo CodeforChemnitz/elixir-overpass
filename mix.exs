@@ -1,4 +1,4 @@
-defmodule Overpassex.Mixfile do
+defmodule Overpass.Mixfile do
   use Mix.Project
 
   def project do

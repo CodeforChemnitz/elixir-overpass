@@ -1,4 +1,4 @@
-# Overpassex
+# Overpass
 
 A Elixir wrapper to access the Overpass API.
 
