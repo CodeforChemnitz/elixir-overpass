@@ -15,6 +15,8 @@ defmodule Overpass.Mixfile do
   end
 
   defp deps do
-    []
+    [
+        {:httpoison, "~> 0.7.4"}
+    ]
   end
 end
