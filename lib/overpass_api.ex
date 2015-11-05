@@ -1,13 +1,15 @@
 defmodule OverpassApi do
 
   require Logger
+  import SweetXml
 
   @url Application.get_env(:overpass, :url)
 
 
-  def query_ql(query) do
+  def query_ql(query, format \\ "json")
+  def query_ql(query, format) do
     Logger.debug "Query: #{query}"
-    HTTPoison.post(@url, query)
+    HTTPoison.post(@url, "[out:" <> format <> "];" <> query)
     |> process_call
     |> process_body
   end
@@ -41,9 +43,16 @@ defmodule OverpassApi do
 
   def process_body({:ok, content_type, body}) when content_type == "application/osm3s+xml" do
     Logger.debug "XML! #{body}"
-    ways = body |> xpath(~x"//ways")
+
+    Logger.debug "WAYS:"
+    ways = body |> xpath(~x"//way"l)
     Logger.debug fn -> inspect(ways) end
-    {:ok, %{ways: ways}}
+
+    Logger.debug "NODES:"
+    nodes = body |> xpath(~x"//node"l)
+    Logger.debug fn -> inspect(nodes) end
+
+    {:ok, %{ways: ways, nodes: nodes}}
   end
 
   def process_body({:ok, content_type, body}) when content_type == "application/json" do
