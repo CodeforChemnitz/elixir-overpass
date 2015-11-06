@@ -7,16 +7,6 @@ defmodule Overpass.API do
     @doc ~S"""
     Querys the OverpassAPI with the given query (xml or overpass ql).
     Returns a tuple `{:ok, {:xml, body}}` or `{:ok, {:json, body}}` on success or `{:error, error}` on error.
-
-    ## Example
-
-        iex> Overpass.API.query("[out:json];node[\"name\"=\"Gielgen\"];out 2;")
-        {:ok, {:json, json}}
-
-        iex> Overpass.API.query("[out:xml];node[\"name\"=\"Gielgen\"];out 2;")
-        {:ok, {:xml, xml}}
-
-
     """
     def query(query) do
         Logger.debug("Query: #{query}")
