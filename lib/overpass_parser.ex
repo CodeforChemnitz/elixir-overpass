@@ -51,7 +51,7 @@ defmodule Overpass.Parser do
         |> xpath(~x"./relation"l)
         |> Enum.map fn (relation) ->
             %Overpass.Relation{
-                id: relation |> xpath(~x"./id"),
+                id: relation |> xpath(~x"./@id"i),
                 members: relation |> xpath(~x"./member"l) |> Enum.map(
                     fn (member) -> %Overpass.RelationMember{
                         type: member |> xpath(~x"./@type"s),
