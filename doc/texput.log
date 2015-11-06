@@ -1,0 +1,22 @@
+This is TeX, Version 3.1415926 (TeX Live 2013/Debian) (format=tex 2014.10.12)  6 NOV 2015 18:41
+**\def\Link#1.a.b.c.{\expandafter\def\csname tex4ht\endcsname{\expandafter\def\
+csname tex4ht\endcsname{#1,html}\input tex4ht.sty }}\def\HCode{\futurelet\HCode
+\HChar}\def\HChar{\ifx"\HCode\def\HCode"##1"{\Link##1}\expandafter\HCode\else\e
+xpandafter\Link\fi}\HCode .a.b.c.\input
+
+*
+! Interruption.
+<*> 
+    
+? 
+(/usr/share/texlive/texmf-dist/tex/latex/tools/.tex
+! Interruption.
+l.2 
+    %% This is file `.tex',
+? 
+! Emergency stop.
+l.2 
+    %% This is file `.tex',
+End of file on the terminal!
+
+No pages of output.
