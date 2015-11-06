@@ -3,20 +3,15 @@ defmodule OverpassAPITest do
   doctest Overpass.API
 
   test "Overpass.API Error" do
-      result = Overpass.API.query("FooBar")
-      assert {:error, _} = result
+      assert {:error, _} = Overpass.API.query("FooBar")
   end
 
   test "Overpass.API with QL and JSON-Response" do
-      {:ok, {:json, result}} = Overpass.API.query("[out:json];node[\"name\"=\"Gielgen\"];out 2;")
-      {:ok, %HTTPoison.Response{status_code: _code, body: body, headers: _headers}} = HTTPoison.get("http://overpass.osm.rambler.ru/cgi/interpreter?data=%5Bout:json%5D;node%5Bname%3DGielgen%5D%3Bout%202%3B")
-      assert result == body
+      assert {:ok, {:json, _}} = Overpass.API.query("[out:json];node[\"name\"=\"Gielgen\"];out 2;")
   end
 
   test "Overpass.API with QL and XML-Response" do
-      {:ok, {:xml, result}} = Overpass.API.query("[out:xml];node[\"name\"=\"Gielgen\"];out 2;")
-      {:ok, %HTTPoison.Response{status_code: _code, body: body, headers: _headers}} = HTTPoison.get("http://overpass.osm.rambler.ru/cgi/interpreter?data=node%5Bname%3DGielgen%5D%3Bout%202%3B")
-      assert result == body
+      assert {:ok, {:xml, _}} = Overpass.API.query("[out:xml];node[\"name\"=\"Gielgen\"];out 2;")
   end
 
 end
