@@ -1,0 +1,1 @@
+sidebarNodes={"exceptions":[],"extras":[{"id":"extra-api-reference","title":"API Reference","headers":[]}],"modules":[{"id":"Overpass","title":"Overpass"},{"id":"Overpass.API","title":"Overpass.API","functions":[{"id":"query/1","anchor":"query/1"}]},{"id":"Overpass.Parser","title":"Overpass.Parser","functions":[{"id":"parse/1","anchor":"parse/1"}]}],"protocols":[]}

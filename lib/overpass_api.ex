@@ -4,7 +4,7 @@ defmodule Overpass.API do
 
     @url Application.get_env(:overpass, :url)
 
-    @doc ~S"""
+    @doc """
     Querys the OverpassAPI with the given query (xml or overpass ql).
     Returns a tuple `{:ok, {:xml, body}}` or `{:ok, {:json, body}}` on success or `{:error, error}` on error.
     """

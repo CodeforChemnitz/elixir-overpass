@@ -2,6 +2,10 @@ defmodule Overpass.Parser do
     require Logger
     import SweetXml
 
+    @doc """
+    Parses the OverpassAPI query response.
+    Returns a tuple `{:ok, %{ways: ways, nodes: nodes}}` on success or `{:error, error}` on error.
+    """
     def parse({:ok, {:xml , response}}) do
         Logger.debug("Type: xml")
         Logger.debug "WAYS:"
