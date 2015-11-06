@@ -48,7 +48,7 @@ defmodule Overpass.Parser do
         end
 
         relations = osm
-        |> xpath(~x"./way"l)
+        |> xpath(~x"./relation"l)
         |> Enum.map fn (relation) ->
             %Overpass.Relation{
                 id: relation |> xpath(~x"./id"),
