@@ -31,11 +31,8 @@ defmodule Overpass.Parser do
         |> Enum.map fn (way) ->
             %Overpass.Way{
                 id: way |> xpath(~x"./@id"i),
-                nds: way |> xpath(~x"./nd"l) |> Enum.map(
-                    fn (nd) -> %{
-                        ref: nd |> xpath(~x"./@ref"i)
-                    }
-                    end
+                node_ids: way |> xpath(~x"./nd"l) |> Enum.map(
+                    fn (nd) -> nd |> xpath(~x"./@ref"i) end
                 ),
                 tags: way |> xpath(~x"./tag"l) |> Enum.map(
                     fn (tag) -> %Overpass.Tag{

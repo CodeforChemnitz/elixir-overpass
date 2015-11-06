@@ -18,7 +18,7 @@ defmodule Overpass do
         @doc """
         http://wiki.openstreetmap.org/wiki/Way
         """
-        defstruct id: 0, nds: [], tags: []
+        defstruct id: 0, node_ids: [], tags: []
     end
 
     defmodule Relation do
