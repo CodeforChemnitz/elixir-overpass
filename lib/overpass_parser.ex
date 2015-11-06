@@ -18,8 +18,8 @@ defmodule Overpass.Parser do
                 lon: node |> xpath(~x"./@lon"s),
                 tags: node |> xpath(~x"./tag"l) |> Enum.map(
                     fn (tag) -> %Overpass.Tag{
-                        k: tag |> xpath(~x"./k"s),
-                        v: tag |> xpath(~x"./v"s)
+                        k: tag |> xpath(~x"./@k"s),
+                        v: tag |> xpath(~x"./@v"s)
                     }
                     end
                 )
