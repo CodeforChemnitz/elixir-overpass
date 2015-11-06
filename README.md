@@ -17,16 +17,16 @@ Based on https://github.com/DinoTools/python-overpy
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
-  1. Add overpassex to your list of dependencies in `mix.exs`:
+  1. Add overpass to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:overpassex, "~> 0.0.1"}]
+          [{:overpass, "~> 0.0.1"}]
         end
 
-  2. Ensure overpassex is started before your application:
+  2. Ensure overpass is started before your application:
 
         def application do
-          [applications: [:overpassex]]
+          [applications: [:overpass]]
         end
 
 ## Examples
