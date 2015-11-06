@@ -21,7 +21,7 @@ defmodule Overpass.Mixfile do
         {:httpoison, "~> 0.7.4"},
         {:sweet_xml, "~> 0.5.0"},
         {:jsx, "~> 2.8"},
-        {:ex_doc, github: "elixir-lang/ex_doc"}
+        {:ex_doc, "~> 0.10.0"}
     ]
   end
 end
