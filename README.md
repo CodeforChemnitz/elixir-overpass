@@ -2,9 +2,9 @@
 
 A Elixir wrapper to access the Overpass API.
 
-Have a look at the [documentation](http://python-overpy.readthedocs.org/) to find additional information.
+Have a look at the [documentation](http://codeforchemnitz.de/elixir-overpass/doc/) to find additional information.
 
-Based on https://github.com/DinoTools/python-overpy
+Based on https://github.com/DinoTools/python-overpy http://python-overpy.readthedocs.org/
 
 ## Features
 
