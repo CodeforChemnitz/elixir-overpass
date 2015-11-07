@@ -4,7 +4,7 @@ defmodule Overpass.Parser do
 
     @doc """
     Parses the OverpassAPI query xml response.
-    Returns a tuple `{:ok, %{nodes: nodes, ways: ways, relations: relations}}` on success or `{:error, error}` on error.
+    Returns a tuple `{:ok, %{nodes: nodes, ways: ways, relations: relations}}`.
     """
     def parse({:ok, {:xml , response}}) do
         Logger.debug("Type: xml")
@@ -73,9 +73,121 @@ defmodule Overpass.Parser do
         {:ok, %{nodes: nodes, ways: ways, relations: relations}}
     end
 
+    @doc """
+    Parses the OverpassAPI query json response.
+    Returns a tuple `{:ok, %{nodes: nodes, ways: ways, relations: relations}}` on success.
+    """
     def parse({:ok, {:json, response}}) do
-        Logger.debug("Type: json")
-        {:ok, ""}
+        %{"elements" => elements} = Enum.into(:jsx.decode(response), %{})
+        elems = elements
+        |> Enum.map(
+            fn (node) ->
+                node |> Enum.into(%{})
+            end
+        )
+
+        nodes = elems
+        |> Enum.filter(
+            fn %{"type" => type} ->
+                type == "node"
+            end
+        )
+        |> Enum.map(
+            fn (node) ->
+                node |> map_node()
+            end
+        )
+
+        ways = elems
+        |> Enum.filter(
+            fn %{"type" => type} ->
+                type == "way"
+            end
+        )
+        |> Enum.map(
+            fn (way) ->
+                way |> map_way()
+            end
+        )
+
+        relations = elems
+        |> Enum.filter(
+            fn %{"type" => type} ->
+                type == "relation"
+            end
+        )
+        |> Enum.map(
+            fn (relation) ->
+                relation |> map_relation()
+            end
+        )
+
+        Logger.debug fn -> inspect(nodes) end
+        Logger.debug fn -> inspect(ways) end
+        Logger.debug fn -> inspect(relations) end
+        {:ok, %{nodes: nodes, ways: ways, relations: relations}}
+    end
+
+    defp map_tag({key, value}) do
+        %Overpass.Tag{k: key, v: value}
+    end
+
+    defp map_node(%{"id" => id, "lon" => lon, "lat" => lat, "tags" => tags}) do
+        %Overpass.Node{
+            id: id,
+            lon: lon,
+            lat: lat,
+            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
+        }
+    end
+
+    defp map_node(%{"id" => id, "lon" => lon, "lat" => lat}) do
+        %Overpass.Node{
+            id: id,
+            lon: lon,
+            lat: lat,
+            tags: [] 
+        }
+    end
+
+    defp map_way(%{"id" => id, "nodes" => nodes, "tags" => tags}) do
+        %Overpass.Way{
+            id: id,
+            node_ids: nodes,
+            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
+        }
+    end
+
+    defp map_way(%{"id" => id, "nodes" => nodes}) do
+        %Overpass.Way{
+            id: id,
+            node_ids: nodes,
+            tags: [] 
+        }
+    end
+
+    defp map_relation_member(%{"type" => type, "ref" => ref, "role" => role}) do
+        %Overpass.RelationMember{
+            type: type,
+            ref: ref,
+            role: role
+        }
+    end
+    
+    defp map_relation(%{"id" => id, "members" => members, "tags" => tags}) do
+        %Overpass.Relation{
+            id: id,
+            members: members |> Enum.map(fn (member) -> member |> Enum.into(%{}) |> map_relation_member() end),
+            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
+        }
+    end
+
+    defp map_relation(%{"id" => id, "members" => members}) do
+        %Overpass.Relation{
+            id: id,
+            members: members |> Enum.map(fn (member) -> member |> map_relation_member() end),
+            tags: [] 
+        }
     end
 
     def parse({:error, error}) do
