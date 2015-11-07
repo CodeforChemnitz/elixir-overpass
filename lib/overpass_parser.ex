@@ -3,7 +3,7 @@ defmodule Overpass.Parser do
     import SweetXml
 
     @doc """
-    Parses the OverpassAPI query xml response.
+    Parses the OverpassAPI query response.
     Returns a tuple `{:ok, %{nodes: nodes, ways: ways, relations: relations}}`.
     """
     def parse({:ok, {:xml , response}}) do
@@ -73,10 +73,6 @@ defmodule Overpass.Parser do
         {:ok, %{nodes: nodes, ways: ways, relations: relations}}
     end
 
-    @doc """
-    Parses the OverpassAPI query json response.
-    Returns a tuple `{:ok, %{nodes: nodes, ways: ways, relations: relations}}` on success.
-    """
     def parse({:ok, {:json, response}}) do
         Logger.debug("Type: json")
         %{"elements" => elements} = Enum.into(:jsx.decode(response), %{})
