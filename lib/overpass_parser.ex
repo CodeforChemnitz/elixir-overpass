@@ -31,7 +31,7 @@ defmodule Overpass.Parser do
         |> Enum.map fn (way) ->
             %Overpass.Way{
                 id: way |> xpath(~x"./@id"i),
-                node_ids: way |> xpath(~x"./nd"l) |> Enum.map(
+                nodes: way |> xpath(~x"./nd"l) |> Enum.map(
                     fn (nd) -> nd |> xpath(~x"./@ref"i) end
                 ),
                 tags: way |> xpath(~x"./tag"l) |> Enum.map(
@@ -70,7 +70,7 @@ defmodule Overpass.Parser do
         Logger.debug fn -> inspect(nodes) end
         Logger.debug fn -> inspect(ways) end
         Logger.debug fn -> inspect(relations) end
-        {:ok, %{nodes: nodes, ways: ways, relations: relations}}
+        {:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}}
     end
 
     def parse({:ok, {:json, response}}) do
@@ -122,9 +122,14 @@ defmodule Overpass.Parser do
         Logger.debug fn -> inspect(nodes) end
         Logger.debug fn -> inspect(ways) end
         Logger.debug fn -> inspect(relations) end
-        {:ok, %{nodes: nodes, ways: ways, relations: relations}}
+        {:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}}
     end
 
+    def parse({:error, error}) do
+        Logger.error(error)
+        {:error, error}
+    end
+    
     defp map_tag({key, value}) do
         %Overpass.Tag{k: key, v: value}
     end
@@ -150,7 +155,7 @@ defmodule Overpass.Parser do
     defp map_way(%{"id" => id, "nodes" => nodes, "tags" => tags}) do
         %Overpass.Way{
             id: id,
-            node_ids: nodes,
+            nodes: nodes,
             tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
         }
     end
@@ -158,7 +163,7 @@ defmodule Overpass.Parser do
     defp map_way(%{"id" => id, "nodes" => nodes}) do
         %Overpass.Way{
             id: id,
-            node_ids: nodes,
+            nodes: nodes,
             tags: [] 
         }
     end
@@ -186,10 +191,4 @@ defmodule Overpass.Parser do
             tags: [] 
         }
     end
-
-    def parse({:error, error}) do
-        Logger.error(error)
-        {:error, error}
-    end
-
 end

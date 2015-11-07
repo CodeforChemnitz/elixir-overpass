@@ -1,5 +1,11 @@
 defmodule Overpass do
 
+    require Logger
+
+    defmodule Response do
+      defstruct nodes: [], ways: [], relations: []
+    end
+
     defmodule Tag do
         @doc """
         http://wiki.openstreetmap.org/wiki/Tags
@@ -18,7 +24,29 @@ defmodule Overpass do
         @doc """
         http://wiki.openstreetmap.org/wiki/Way
         """
-        defstruct id: "", node_ids: [], tags: []
+        defstruct id: "", nodes: [], tags: []
+       
+        @doc """
+        Returns a List of `%Overpass.Node{}` whith all nodes from the selected way. Set `resolve_missing` to `true` to query the nodes from the API.
+        """
+        def get_nodes(nodes, way, resolve_missing \\ false)
+        def get_nodes(nodes, %Way{id: id, nodes: node_ids}, resolve_missing) when not resolve_missing do
+            Logger.debug fn -> inspect(id) end
+            Logger.debug fn -> inspect(node_ids) end
+            Logger.debug fn -> inspect(resolve_missing) end
+            result = Enum.filter(nodes,
+                fn %Node{id: node_id} ->
+                    Enum.member?(node_ids, node_id)
+                end
+            )
+            result
+        end
+        def get_nodes(_nodes, %Way{id: id, nodes: _node_ids}, resolve_missing) when resolve_missing do
+            Logger.debug fn -> inspect(id) end
+            Logger.debug fn -> inspect(resolve_missing) end
+            {:ok, %Response{nodes: nodes}} = Overpass.API.query("way(#{id});node(w);out body;") |> Overpass.Parser.parse
+            nodes
+        end
     end
 
     defmodule Relation do
