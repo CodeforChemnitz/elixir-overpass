@@ -9,7 +9,7 @@ Based on https://github.com/DinoTools/python-overpy
 ## Features
 
 * [x] Query Overpass API
-* [ ] Parse JSON and XML response data
+* [x] Parse JSON and XML response data
 * [ ] Additional helper functions
 
 
