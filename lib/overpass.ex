@@ -11,21 +11,21 @@ defmodule Overpass do
         @doc """
         http://wiki.openstreetmap.org/wiki/Node
         """
-        defstruct id: 0, lat: "", lon: "", tags: []
+        defstruct id: "", lat: "", lon: "", tags: []
     end
 
     defmodule Way do
         @doc """
         http://wiki.openstreetmap.org/wiki/Way
         """
-        defstruct id: 0, node_ids: [], tags: []
+        defstruct id: "", node_ids: [], tags: []
     end
 
     defmodule Relation do
         @doc """
         http://wiki.openstreetmap.org/wiki/Relation
         """
-        defstruct id: 0, members: [], tags: []
+        defstruct id: "", members: [], tags: []
     end
 
     defmodule RelationMember do

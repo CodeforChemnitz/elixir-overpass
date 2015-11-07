@@ -14,8 +14,8 @@ defmodule Overpass.Parser do
         |> Enum.map fn (node) ->
             %Overpass.Node{
                 id: node |> xpath(~x"./@id"i),
-                lat: node |> xpath(~x"./@lat"s),
-                lon: node |> xpath(~x"./@lon"s),
+                lat: node |> xpath(~x"./@lat"s) |> String.to_float(),
+                lon: node |> xpath(~x"./@lon"s) |> String.to_float(),
                 tags: node |> xpath(~x"./tag"l) |> Enum.map(
                     fn (tag) -> %Overpass.Tag{
                         k: tag |> xpath(~x"./@k"s),
@@ -78,6 +78,7 @@ defmodule Overpass.Parser do
     Returns a tuple `{:ok, %{nodes: nodes, ways: ways, relations: relations}}` on success.
     """
     def parse({:ok, {:json, response}}) do
+        Logger.debug("Type: json")
         %{"elements" => elements} = Enum.into(:jsx.decode(response), %{})
         elems = elements
         |> Enum.map(
