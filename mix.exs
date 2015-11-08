@@ -7,6 +7,8 @@ defmodule Overpass.Mixfile do
      elixir: "~> 1.1",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     name: "Overpass",
+     source_url: "https://github.com/CodeforChemnitz/elixir-overpass",
      deps: deps]
   end
 
@@ -18,7 +20,8 @@ defmodule Overpass.Mixfile do
     [
         {:httpoison, "~> 0.7.4"},
         {:sweet_xml, "~> 0.5.0"},
-        {:jsx, "~> 2.0"}
+        {:jsx, "~> 2.8"},
+        {:ex_doc, "~> 0.10.0"}
     ]
   end
 end

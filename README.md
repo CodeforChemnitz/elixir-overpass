@@ -2,14 +2,14 @@
 
 A Elixir wrapper to access the Overpass API.
 
-Have a look at the [documentation](http://python-overpy.readthedocs.org/) to find additional information.
+Have a look at the [documentation](http://codeforchemnitz.de/elixir-overpass/doc/) to find additional information.
 
-Based on https://github.com/DinoTools/python-overpy
+Based on https://github.com/DinoTools/python-overpy http://python-overpy.readthedocs.org/
 
 ## Features
 
-* [ ] Query Overpass API
-* [ ] Parse JSON and XML response data
+* [x] Query Overpass API
+* [x] Parse JSON and XML response data
 * [ ] Additional helper functions
 
 
@@ -17,16 +17,16 @@ Based on https://github.com/DinoTools/python-overpy
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
 
-  1. Add overpassex to your list of dependencies in `mix.exs`:
+  1. Add overpass to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:overpassex, "~> 0.0.1"}]
+          [{:overpass, "~> 0.0.1"}]
         end
 
-  2. Ensure overpassex is started before your application:
+  2. Ensure overpass is started before your application:
 
         def application do
-          [applications: [:overpassex]]
+          [applications: [:overpass]]
         end
 
 ## Examples

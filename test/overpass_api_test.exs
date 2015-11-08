@@ -1,38 +1,17 @@
-defmodule OverpassApiTest do
+defmodule OverpassAPITest do
   use ExUnit.Case
-  doctest OverpassApi
-  require Logger
-  import SweetXml
+  doctest Overpass.API
 
-  # test "bad request" do
-  #   result = OverpassApi.query_ql "bad"
-  #   assert is_binary(result)
-  # end
+  test "Overpass.API Error" do
+      assert {:error, _} = Overpass.API.query("FooBar")
+  end
 
-  # test "get ways as json" do
-  #   result = OverpassApi.query_ql """
-  #   way(50.746,7.154,50.748,7.157) ["highway"];
-  #   (._;>;);
-  #   out body;
-  #   """, "json"
-  #   assert {:ok, _} = result
-  # end
+  test "Overpass.API with QL and JSON-Response" do
+      assert {:ok, {:json, _}} = Overpass.API.query("[out:json];node[\"name\"=\"Gielgen\"];out 2;")
+  end
 
-  test "get ways as xml" do
-    result = OverpassApi.query_ql """
-    way(50.746,7.154,50.748,7.157) ["highway"];
-    (._;>;);
-    out body;
-    """, "xml"
-    assert {:ok, _} = result
-
-    {:ok, %{ways: ways, nodes: nodes}} = result
-    #OverpassHelper.get_attr_list ways, "lat"
-    latlongs = nodes
-    |> Stream.map(fn el -> { xpath(el, ~x"./@lat"s), xpath(el, ~x"./@lon"s) } end)
-    |> Enum.into []
-    assert is_list(latlongs)
-    Logger.debug fn -> inspect(latlongs) end
+  test "Overpass.API with QL and XML-Response" do
+      assert {:ok, {:xml, _}} = Overpass.API.query("[out:xml];node[\"name\"=\"Gielgen\"];out 2;")
   end
 
 end
