@@ -15,7 +15,7 @@ Based on https://github.com/DinoTools/python-overpy http://python-overpy.readthe
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+As [available in Hex](https://hex.pm/packages/overpass), the package can be installed as:
 
   1. Add overpass to your list of dependencies in `mix.exs`:
 
