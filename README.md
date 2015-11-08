@@ -29,6 +29,10 @@ As [available in Hex](https://hex.pm/packages/overpass), the package can be inst
           [applications: [:overpass]]
         end
 
+  3. Add the Overpass API URL to your config in `config\config.exs`:
+
+        config :overpass, url: "http://overpass-api.de/api/interpreter"
+
 ## Examples
 
 ### Query the API
