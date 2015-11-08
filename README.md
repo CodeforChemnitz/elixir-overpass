@@ -52,7 +52,7 @@ Using QL:
 Using XML:
 ```
 {:ok, {:xml, response}} = Overpass.API.query("""
-  <osm-script">
+  <osm-script>
     <query type="node">
       <has-kv k="name" v="Gielgen"/>
     </query>
