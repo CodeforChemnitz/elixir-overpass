@@ -75,7 +75,7 @@ Using XML:
 ### Query the API and Parse the Result
 
 ```
-{:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}} =  = Overpass.API.query("""
+{:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}} = Overpass.API.query("""
   (
     node
       ["amenity"="fire_station"]
@@ -95,7 +95,7 @@ Using XML:
 ### Get the nodes for a way
 
 ```
-{:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: _relations}} =  = Overpass.API.query("""
+{:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: _relations}} = Overpass.API.query("""
   (
     node
       ["amenity"="fire_station"]
