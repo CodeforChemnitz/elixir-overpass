@@ -25,7 +25,14 @@ defmodule Overpass.Mixfile do
         {:httpoison, "~> 0.7.4"},
         {:sweet_xml, "~> 0.5.0"},
         {:jsx, "~> 2.8"},
-        {:ex_doc, "~> 0.10.0"}
+
+        # Doc
+        {:inch_ex, "~> 0.4.0", only: :dev},
+        {:earmark, "~> 0.1.19", only: :dev},
+        {:ex_doc, "~> 0.10.0", only: :dev},
+
+        # Dev
+        {:dogma, "~> 0.0", only: :dev},
     ]
   end
 

@@ -1,4 +1,7 @@
 defmodule Overpass.Parser do
+    @moduledoc """
+    """
+
     require Logger
     import SweetXml
 
@@ -129,7 +132,7 @@ defmodule Overpass.Parser do
         Logger.error(error)
         {:error, error}
     end
-    
+
     defp map_tag({key, value}) do
         %Overpass.Tag{k: key, v: value}
     end
@@ -139,7 +142,7 @@ defmodule Overpass.Parser do
             id: id,
             lon: lon,
             lat: lat,
-            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
+            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end)
         }
     end
 
@@ -148,7 +151,7 @@ defmodule Overpass.Parser do
             id: id,
             lon: lon,
             lat: lat,
-            tags: [] 
+            tags: []
         }
     end
 
@@ -156,7 +159,7 @@ defmodule Overpass.Parser do
         %Overpass.Way{
             id: id,
             nodes: nodes,
-            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
+            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end)
         }
     end
 
@@ -164,7 +167,7 @@ defmodule Overpass.Parser do
         %Overpass.Way{
             id: id,
             nodes: nodes,
-            tags: [] 
+            tags: []
         }
     end
 
@@ -175,12 +178,12 @@ defmodule Overpass.Parser do
             role: role
         }
     end
-    
+
     defp map_relation(%{"id" => id, "members" => members, "tags" => tags}) do
         %Overpass.Relation{
             id: id,
             members: members |> Enum.map(fn (member) -> member |> Enum.into(%{}) |> map_relation_member() end),
-            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end) 
+            tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end)
         }
     end
 
@@ -188,7 +191,7 @@ defmodule Overpass.Parser do
         %Overpass.Relation{
             id: id,
             members: members |> Enum.map(fn (member) -> member |> map_relation_member() end),
-            tags: [] 
+            tags: []
         }
     end
 end

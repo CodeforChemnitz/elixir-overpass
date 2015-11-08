@@ -1,4 +1,6 @@
 defmodule Overpass.API do
+    @moduledoc """
+    """
 
     require Logger
 
@@ -10,8 +12,7 @@ defmodule Overpass.API do
     """
     def query(query) do
         Logger.debug("Query: #{query}")
-        HTTPoison.post(@url, query)
-        |> process_response
+        HTTPoison.post(@url, query) |> process_response()
     end
 
     defp process_response({:ok, %HTTPoison.Response{status_code: 200, body: body, headers: headers}}) do
