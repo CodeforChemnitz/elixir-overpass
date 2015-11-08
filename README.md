@@ -89,7 +89,7 @@ Using XML:
   );
   (._;>;);
   out;
-""") |> Overpass.Parser.prase()
+""") |> Overpass.Parser.parse()
 ```
 
 ### Get the nodes for a way
@@ -109,7 +109,7 @@ Using XML:
   );
   (._;>;);
   out;
-""") |> Overpass.Parser.prase()
+""") |> Overpass.Parser.parse()
 
 # Get nodes for the way from the responded nodes
 list_with_nodes = Overpass.Way.get_nodes(nodes, List.first(ways))
