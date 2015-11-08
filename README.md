@@ -20,7 +20,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   1. Add overpass to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:overpass, "~> 0.0.1"}]
+          [{:overpass, "~> 0.1.0"}]
         end
 
   2. Ensure overpass is started before your application:
