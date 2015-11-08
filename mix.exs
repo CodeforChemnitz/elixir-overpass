@@ -37,7 +37,7 @@ defmodule Overpass.Mixfile do
 
   defp package do
     [# These are the default files included in the package
-      maintainers: ["Tobias Gall", "Ronny Hartenstein"],
+      contributors: ["Tobias Gall", "Ronny Hartenstein"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/CodeforChemnitz/elixir-overpass",
                "Docs" => "http://codeforchemnitz.de/elixir-overpass/doc/"}]
