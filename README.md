@@ -1,4 +1,4 @@
-# Overpass
+# Elixir-Overpass
 
 A Elixir wrapper to access the Overpass API.
 
@@ -121,3 +121,7 @@ list_with_nodes = Overpass.Way.get_nodes(nodes, List.first(ways), true)
 ## Helper
 
 TODO
+
+# License
+
+The MIT License (MIT)
