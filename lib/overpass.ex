@@ -1,31 +1,52 @@
 defmodule Overpass do
     @moduledoc """
+    ToDo: Documentation
     """
     require Logger
 
     defmodule Response do
         @moduledoc """
+        ToDo: Documentation
+        """
+
+        @doc """
+        ToDo: Documentation
         """
         defstruct nodes: [], ways: [], relations: []
     end
 
     defmodule Tag do
         @moduledoc """
+        ToDo: Documentation
+        """
+
+        @doc """
         http://wiki.openstreetmap.org/wiki/Tags
+        ToDo: Documentation
         """
         defstruct k: "", v: ""
     end
 
     defmodule Node do
         @moduledoc """
+        ToDo: Documentation
+        """
+
+        @doc """
         http://wiki.openstreetmap.org/wiki/Node
+        ToDo: Documentation
         """
         defstruct id: "", lat: "", lon: "", tags: []
     end
 
     defmodule Way do
         @moduledoc """
+        ToDo: Documentation
+        """
+
+        @doc """
         http://wiki.openstreetmap.org/wiki/Way
+        ToDo: Documentation
         """
         defstruct id: "", nodes: [], tags: []
 
@@ -58,14 +79,24 @@ defmodule Overpass do
 
     defmodule Relation do
         @moduledoc """
+        ToDo: Documentation
+        """
+
+        @doc """
         http://wiki.openstreetmap.org/wiki/Relation
+        ToDo: Documentation
         """
         defstruct id: "", members: [], tags: []
     end
 
     defmodule RelationMember do
         @moduledoc """
+        ToDo: Documentation
+        """
+
+        @doc """
         http://wiki.openstreetmap.org/wiki/Relation
+        ToDo: Documentation
         """
         defstruct type: "", ref: "", role: ""
     end
