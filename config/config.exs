@@ -27,6 +27,7 @@ config :dogma,
     rule_set: Dogma.RuleSet.All,
     override: %{
         LineLength              => [max_length: 120],
+        PipelineStart           => false,
     }
 
 # It is also possible to import configuration files, relative to this
