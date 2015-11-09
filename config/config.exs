@@ -25,11 +25,9 @@ config :overpass, url: "http://overpass-api.de/api/interpreter"
 
 config :dogma,
     rule_set: Dogma.RuleSet.All,
-
-    # This currently does nothing.
-    additional_config: [
-        LineLength: [ max_length: 120 ],
-    ]
+    override: %{
+        LineLength              => [max_length: 120],
+    }
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

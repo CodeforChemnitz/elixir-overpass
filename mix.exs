@@ -32,7 +32,8 @@ defmodule Overpass.Mixfile do
         {:ex_doc, "~> 0.10.0", only: :dev},
 
         # Dev
-        {:dogma, "~> 0.0", only: :dev},
+        {:dogma, github: "lpil/dogma", only: :dev},
+        #{:dogma, "~> 0.0", only: :dev},
     ]
   end
 
