@@ -55,9 +55,17 @@ defmodule Overpass do
         Returns a List of `%Overpass.Node{}` with all nodes from the selected way.
         Set `resolve_missing` to `true` to query the nodes from the API.
         """
-        def get_nodes(nodes, way, resolve_missing \\ false)
+        @spec get_nodes(%Way{}, [%Node{}], false | true) :: [%Node{}]
+        def get_nodes(way, nodes, resolve_missing \\ false)
 
-        def get_nodes(nodes, %Way{id: id, nodes: node_ids}, resolve_missing) when not resolve_missing do
+        def get_nodes(
+            %Way{
+                id: id,
+                nodes: node_ids
+            },
+            nodes,
+            resolve_missing
+        ) when not resolve_missing do
             Logger.debug fn -> inspect(id) end
             Logger.debug fn -> inspect(node_ids) end
             Logger.debug fn -> inspect(resolve_missing) end
@@ -68,7 +76,14 @@ defmodule Overpass do
             )
         end
 
-        def get_nodes(_nodes, %Way{id: id, nodes: _node_ids}, resolve_missing) when resolve_missing do
+        def get_nodes(
+            %Way{
+                id: id,
+                nodes: _node_ids
+            },
+            _nodes,
+            resolve_missing
+        ) when resolve_missing do
             Logger.debug fn -> inspect(id) end
             Logger.debug fn -> inspect(resolve_missing) end
             {:ok, %{nodes: nodes}} = Overpass.API.query("""

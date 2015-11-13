@@ -106,7 +106,7 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#get_nodes/3">get_nodes(nodes, way, resolve_missing \\ false)</a>
+    <a href="#get_nodes/3">get_nodes(way, nodes, resolve_missing \\ false)</a>
   </div>
   
     <div class="summary-synopsis"><p>Returns a List of <code class="inline">%Overpass.Node{}</code> with all nodes from the selected way.
@@ -156,13 +156,22 @@ Set <code class="inline">resolve_missing</code> to <code class="inline">true</co
     <a href="#get_nodes/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">get_nodes(nodes, way, resolve_missing \\ false)</span>
+    <span class="signature">get_nodes(way, nodes, resolve_missing \\ false)</span>
       
-      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/v0.1.0/lib/overpass.ex#L58" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/v0.1.0/lib/overpass.ex#L59" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">get_nodes(%Overpass.Way{id: term, nodes: term, tags: term}, [%Overpass.Node{id: term, lat: term, lon: term, tags: term}], false | true) :: [%Overpass.Node{id: term, lat: term, lon: term, tags: term}]</code></pre>
+        
+      </div>
+    </div>
   
   <section class="docstring">
     <p>Returns a List of <code class="inline">%Overpass.Node{}</code> with all nodes from the selected way.

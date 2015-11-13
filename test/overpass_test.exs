@@ -4,7 +4,10 @@ defmodule OverpassTest do
     doctest Overpass
 
     test "Overpass.Way.get_nodes() JSON" do
-        {:ok, %Overpass.Response{nodes: nodes, ways: ways}} = Overpass.API.query("""
+        {:ok, %Overpass.Response{
+            nodes: nodes,
+            ways: ways
+        }} = Overpass.API.query("""
             [out:"json"];
             (
               node
@@ -21,8 +24,8 @@ defmodule OverpassTest do
             out;
         """) |> Overpass.Parser.parse
 
-        test_with_false = Overpass.Way.get_nodes(nodes, List.first(ways))
-        test_with_true = Overpass.Way.get_nodes([], List.first(ways), true)
+        test_with_false = Overpass.Way.get_nodes(List.first(ways), nodes)
+        test_with_true = Overpass.Way.get_nodes(List.first(ways), [], true)
 
         Logger.debug("test_with_false")
         Logger.debug fn -> inspect(test_with_false) end
@@ -33,7 +36,10 @@ defmodule OverpassTest do
     end
 
     test "Overpass.Way.get_nodes() XML" do
-        {:ok, %Overpass.Response{nodes: nodes, ways: ways}} = Overpass.API.query("""
+        {:ok, %Overpass.Response{
+            nodes: nodes,
+            ways: ways
+        }} = Overpass.API.query("""
             (
               node
                 ["amenity"="fire_station"]
@@ -49,8 +55,8 @@ defmodule OverpassTest do
             out;
         """) |> Overpass.Parser.parse
 
-        test_with_false = Overpass.Way.get_nodes(nodes, List.first(ways))
-        test_with_true = Overpass.Way.get_nodes([], List.first(ways), true)
+        test_with_false = Overpass.Way.get_nodes(List.first(ways), nodes)
+        test_with_true = Overpass.Way.get_nodes(List.first(ways), [], true)
 
         Logger.debug("test_with_false")
         Logger.debug fn -> inspect(test_with_false) end

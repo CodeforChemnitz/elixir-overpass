@@ -75,7 +75,11 @@ defmodule Overpass.Parser do
         Logger.debug fn -> inspect(nodes) end
         Logger.debug fn -> inspect(ways) end
         Logger.debug fn -> inspect(relations) end
-        {:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}}
+        { :ok, %Overpass.Response{
+            nodes: nodes,
+            ways: ways,
+            relations: relations
+        }}
     end
 
     @spec parse({:ok, {:json, String.t}}) :: {:ok, %Overpass.Response{}}
@@ -128,7 +132,11 @@ defmodule Overpass.Parser do
         Logger.debug fn -> inspect(nodes) end
         Logger.debug fn -> inspect(ways) end
         Logger.debug fn -> inspect(relations) end
-        {:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}}
+        {:ok, %Overpass.Response{
+            nodes: nodes,
+            ways: ways,
+            relations: relations
+        }}
     end
 
     @spec parse({:error, String.t}) :: {:error, String.t}
@@ -175,7 +183,9 @@ defmodule Overpass.Parser do
         }
     end
 
-    defp map_relation_member(%{"type" => type, "ref" => ref, "role" => role}) do
+    defp map_relation_member(
+        %{"type" => type, "ref" => ref, "role" => role}
+    ) do
         %Overpass.RelationMember{
             type: type,
             ref: ref,
@@ -183,10 +193,15 @@ defmodule Overpass.Parser do
         }
     end
 
-    defp map_relation(%{"id" => id, "members" => members, "tags" => tags}) do
+    defp map_relation(
+        %{"id" => id, "members" => members, "tags" => tags}
+    ) do
         %Overpass.Relation{
             id: id,
-            members: members |> Enum.map(fn (member) -> member |> Enum.into(%{}) |> map_relation_member() end),
+            members: members |> Enum.map(
+                    fn (member) ->
+                        member |> Enum.into(%{}) |> map_relation_member()
+                    end),
             tags: tags |> Enum.map(fn (tag) -> tag |> map_tag() end)
         }
     end
@@ -194,7 +209,10 @@ defmodule Overpass.Parser do
     defp map_relation(%{"id" => id, "members" => members}) do
         %Overpass.Relation{
             id: id,
-            members: members |> Enum.map(fn (member) -> member |> map_relation_member() end),
+            members: members |> Enum.map(
+                    fn (member) ->
+                        member |> map_relation_member()
+                    end),
             tags: []
         }
     end
