@@ -63,7 +63,7 @@
         Overpass.API
         
         
-          <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/master/lib/overpass_api.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/v0.1.0/lib/overpass/api.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -71,7 +71,9 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>ToDo: Documentation</p>
+          <p>Provides the functions to query the Overpass API.</p>
+<p>Don’t forget to add the following to your <code class="inline">config/config.exs</code>:</p>
+<pre><code class="elixir">config :overpass, url: &quot;http://overpass-api.de/api/interpreter&quot;</code></pre>
 
         </section>
       
@@ -129,11 +131,24 @@ Returns a tuple <code class="inline">{:ok, {:xml, body}}</code> or <code class="
     </a>
     <span class="signature">query(query)</span>
       
-      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/master/lib/overpass_api.ex#L14" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/v0.1.0/lib/overpass/api.ex#L22" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">query(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: {:error, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
+        
+          <pre><code class="elixir">query(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: {:ok, {:xml, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}}</code></pre>
+        
+          <pre><code class="elixir">query(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: {:ok, {:json, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}}</code></pre>
+        
+      </div>
+    </div>
   
   <section class="docstring">
     <p>Querys the OverpassAPI with the given query (xml or overpass ql).

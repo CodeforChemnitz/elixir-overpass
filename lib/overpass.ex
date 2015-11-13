@@ -1,57 +1,58 @@
 defmodule Overpass do
     @moduledoc """
-    ToDo: Documentation
     """
+
     require Logger
-
-    defmodule Response do
-        @moduledoc """
-        ToDo: Documentation
-        """
-
-        @doc """
-        ToDo: Documentation
-        """
-        defstruct nodes: [], ways: [], relations: []
-    end
 
     defmodule Tag do
         @moduledoc """
-        ToDo: Documentation
+        http://wiki.openstreetmap.org/wiki/Tags
         """
 
-        @doc """
-        http://wiki.openstreetmap.org/wiki/Tags
-        ToDo: Documentation
-        """
-        defstruct k: "", v: ""
+        defstruct k: "",
+                  v: ""
+
+        @type t :: %__MODULE__{
+            k: String.t,
+            v: String.t
+        }
     end
 
     defmodule Node do
         @moduledoc """
-        ToDo: Documentation
+        http://wiki.openstreetmap.org/wiki/Node
         """
 
-        @doc """
-        http://wiki.openstreetmap.org/wiki/Node
-        ToDo: Documentation
-        """
-        defstruct id: "", lat: "", lon: "", tags: []
+        defstruct id: 0,
+                  lat: 0.0,
+                  lon: 0.0,
+                  tags: []
+
+        @type t :: %__MODULE__{
+            id: integer,
+            lat: float,
+            lon: float,
+            tags: [%Overpass.Tag{}]
+        }
     end
 
     defmodule Way do
         @moduledoc """
-        ToDo: Documentation
-        """
-
-        @doc """
         http://wiki.openstreetmap.org/wiki/Way
-        ToDo: Documentation
         """
-        defstruct id: "", nodes: [], tags: []
+
+        defstruct id: 0,
+                  nodes: [],
+                  tags: []
+
+        @type t :: %__MODULE__{
+            id: integer,
+            nodes: [%Overpass.Node{}],
+            tags: [%Overpass.Tag{}]
+        }
 
         @doc """
-        Returns a List of `%Overpass.Node{}` whith all nodes from the selected way.
+        Returns a List of `%Overpass.Node{}` with all nodes from the selected way.
         Set `resolve_missing` to `true` to query the nodes from the API.
         """
         def get_nodes(nodes, way, resolve_missing \\ false)
@@ -70,34 +71,57 @@ defmodule Overpass do
         def get_nodes(_nodes, %Way{id: id, nodes: _node_ids}, resolve_missing) when resolve_missing do
             Logger.debug fn -> inspect(id) end
             Logger.debug fn -> inspect(resolve_missing) end
-            {:ok, %Response{nodes: nodes}} = Overpass.API.query("""
+            {:ok, %{nodes: nodes}} = Overpass.API.query("""
                 way(#{id});node(w);out body;
             """) |> Overpass.Parser.parse()
             nodes
         end
     end
 
-    defmodule Relation do
-        @moduledoc """
-        ToDo: Documentation
-        """
-
-        @doc """
-        http://wiki.openstreetmap.org/wiki/Relation
-        ToDo: Documentation
-        """
-        defstruct id: "", members: [], tags: []
-    end
-
     defmodule RelationMember do
         @moduledoc """
-        ToDo: Documentation
+        http://wiki.openstreetmap.org/wiki/Relation
         """
 
-        @doc """
-        http://wiki.openstreetmap.org/wiki/Relation
-        ToDo: Documentation
-        """
-        defstruct type: "", ref: "", role: ""
+        defstruct type: "",
+                  ref: "",
+                  role: ""
+
+        @type t :: %__MODULE__{
+            type: String.t,
+            ref: String.t,
+            role: String.t,
+        }
     end
+
+    defmodule Relation do
+        @moduledoc """
+        http://wiki.openstreetmap.org/wiki/Relation
+        """
+
+        defstruct id: 0,
+                  members: [],
+                  tags: []
+
+        @type t :: %__MODULE__{
+            id: integer,
+            members: [%Overpass.RelationMember{}],
+            tags: [%Overpass.Tag{}]
+        }
+    end
+
+    defmodule Response do
+        @moduledoc """
+        """
+        defstruct nodes: [],
+                  ways: [],
+                  relations: []
+
+        @type t :: %__MODULE__{
+            nodes: [%Overpass.Node{}],
+            ways: [%Overpass.Way{}],
+            relations: [%Overpass.Relation{}]
+        }
+    end
+
 end

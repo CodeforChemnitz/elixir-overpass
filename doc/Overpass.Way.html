@@ -63,7 +63,7 @@
         Overpass.Way
         
         
-          <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/master/lib/overpass.ex#L42" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/v0.1.0/lib/overpass.ex#L39" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -71,7 +71,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>ToDo: Documentation</p>
+          <p><a href="http://wiki.openstreetmap.org/wiki/Way">http://wiki.openstreetmap.org/wiki/Way</a></p>
 
         </section>
       
@@ -85,6 +85,19 @@
             Summary
           </h1>
           
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:t/0">t()</a>
+  </div>
+  
+</div>
+
+  </div>
+
 
           
   <div class="summary-functions summary">
@@ -93,20 +106,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#__struct__/0">__struct__()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p><a href="http://wiki.openstreetmap.org/wiki/Way">http://wiki.openstreetmap.org/wiki/Way</a>
-ToDo: Documentation</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#get_nodes/3">get_nodes(nodes, way, resolve_missing \\ false)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Returns a List of <code class="inline">%Overpass.Node{}</code> whith all nodes from the selected way.
+    <div class="summary-synopsis"><p>Returns a List of <code class="inline">%Overpass.Node{}</code> with all nodes from the selected way.
 Set <code class="inline">resolve_missing</code> to <code class="inline">true</code> to query the nodes from the API</p>
 </div>
   
@@ -123,6 +126,22 @@ Set <code class="inline">resolve_missing</code> to <code class="inline">true</co
       
 
       
+        <section id="types" class="types details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <i class="icon-link"></i>
+            </a>
+            Types
+          </h1>
+          <div class="types-list">
+            <div id="t:t/0" class="type-detail">
+  <pre><code class="elixir"><a href="#t:t/0">t</a> :: %Overpass.Way{id: integer, nodes: [%Overpass.Node{id: term, lat: term, lon: term, tags: term}], tags: [%Overpass.Tag{k: term, v: term}]}</code></pre>
+  
+</div>
+
+          </div>
+        </section>
+      
 
       
         <section id="functions" class="details-list">
@@ -132,40 +151,21 @@ Set <code class="inline">resolve_missing</code> to <code class="inline">true</co
             </a>
             Functions
           </h1>
-          <div class="detail" id="__struct__/0">
-  <div class="detail-header">
-    <a href="#__struct__/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">__struct__()</span>
-      
-      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/master/lib/overpass.ex#L51" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-  <section class="docstring">
-    <p><a href="http://wiki.openstreetmap.org/wiki/Way">http://wiki.openstreetmap.org/wiki/Way</a>
-ToDo: Documentation</p>
-
-  </section>
-</div>
-<div class="detail" id="get_nodes/3">
+          <div class="detail" id="get_nodes/3">
   <div class="detail-header">
     <a href="#get_nodes/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">get_nodes(nodes, way, resolve_missing \\ false)</span>
       
-      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/master/lib/overpass.ex#L57" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/CodeforChemnitz/elixir-overpass/blob/v0.1.0/lib/overpass.ex#L58" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    <p>Returns a List of <code class="inline">%Overpass.Node{}</code> whith all nodes from the selected way.
+    <p>Returns a List of <code class="inline">%Overpass.Node{}</code> with all nodes from the selected way.
 Set <code class="inline">resolve_missing</code> to <code class="inline">true</code> to query the nodes from the API.</p>
 
   </section>

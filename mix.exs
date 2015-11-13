@@ -13,7 +13,12 @@ defmodule Overpass.Mixfile do
      source_url: "https://github.com/CodeforChemnitz/elixir-overpass",
      description: description,
      package: package,
-     deps: deps]
+     deps: deps,
+     docs: [ extras: ["README.md"],
+             source_ref: "v#{@version}",
+             source_url: "https://github.com/CodeforChemnitz/elixir-overpass"
+           ]
+    ]
   end
 
   def application do
@@ -32,8 +37,7 @@ defmodule Overpass.Mixfile do
         {:ex_doc, "~> 0.10.0", only: :dev},
 
         # Dev
-        {:dogma, github: "lpil/dogma", only: :dev},
-        #{:dogma, "~> 0.0", only: :dev},
+        {:dogma, "~> 0.0.11", only: :dev},
     ]
   end
 
