@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>README – Elixir-Overpass v0.1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.10.0">
+    <link rel="stylesheet" href="dist/app.css" />
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="extras">
+
+<div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+  <button class="sidebar-toggle">
+    <i class="icon-menu"></i>
+  </button>
+
+  
+  <a href="extra-api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Elixir-Overpass
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+
+  <ul id="full-list" class="sidebar-fullList"></ul>
+  <div class="sidebar-noResults"></div>
+</section>
+
+<section class="content">
+  <div id="content" class="content-inner">
+
+
+<h1>Elixir-Overpass</h1>
+<p>A Elixir wrapper to access the Overpass API.</p>
+<p>Have a look at the <a href="http://codeforchemnitz.de/elixir-overpass/doc/">documentation</a> to find additional information.</p>
+<p>Based on <a href="https://github.com/DinoTools/python-overpy">https://github.com/DinoTools/python-overpy</a> <a href="http://python-overpy.readthedocs.org/">http://python-overpy.readthedocs.org/</a></p>
+<h2 id="Features"> Features</h2><ul>
+<li>[x] Query Overpass API
+</li>
+<li>[x] Parse JSON and XML response data
+</li>
+<li>[ ] Additional helper functions
+</li>
+</ul>
+<h2 id="Installation"> Installation</h2><p>As <a href="https://hex.pm/packages/overpass">available in Hex</a>, the package can be installed as:</p>
+<ol>
+<li><p>Add overpass to your list of dependencies in <code class="inline">mix.exs</code>:</p>
+<pre><code class="elixir">def deps do
+  [{:overpass, &quot;~&gt; 0.1.0&quot;}]
+end</code></pre>
+</li>
+<li><p>Ensure overpass is started before your application:</p>
+<pre><code class="elixir">def application do
+  [applications: [:overpass]]
+end</code></pre>
+</li>
+<li><p>Add the Overpass API URL to your config in <code class="inline">config/config.exs</code>:</p>
+<pre><code class="elixir">config :overpass, url: &quot;http://overpass-api.de/api/interpreter&quot;</code></pre>
+</li>
+</ol>
+<h2 id="Examples"> Examples</h2><h3>Query the API</h3>
+<p>Using QL:</p>
+<pre><code class="elixir">{:ok, {:xml, response}} = Overpass.API.query(&quot;&quot;&quot;
+  node[&quot;name&quot;=&quot;Gielgen&quot;];
+  out body;
+&quot;&quot;&quot;)</code></pre>
+<pre><code class="elixir">{:ok, {:json, response}} = Overpass.API.query(&quot;&quot;&quot;
+  [out:json];
+  node[&quot;name&quot;=&quot;Gielgen&quot;];
+  out body;
+&quot;&quot;&quot;)</code></pre>
+<p>Using XML:</p>
+<pre><code class="elixir">{:ok, {:xml, response}} = Overpass.API.query(&quot;&quot;&quot;
+  &lt;osm-script&gt;
+    &lt;query type=&quot;node&quot;&gt;
+      &lt;has-kv k=&quot;name&quot; v=&quot;Gielgen&quot;/&gt;
+    &lt;/query&gt;
+    &lt;print/&gt;
+  &lt;/osm-script&gt;
+&quot;&quot;&quot;)</code></pre>
+<pre><code class="elixir">{:ok, {:json, response}} = Overpass.API.query(&quot;&quot;&quot;
+  &lt;osm-script output=&quot;json&quot;&gt;
+    &lt;query type=&quot;node&quot;&gt;
+      &lt;has-kv k=&quot;name&quot; v=&quot;Gielgen&quot;/&gt;
+    &lt;/query&gt;
+    &lt;print/&gt;
+  &lt;/osm-script&gt;
+&quot;&quot;&quot;)</code></pre>
+<h3>Query the API and Parse the Result</h3>
+<pre><code class="elixir">{:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: relations}} = Overpass.API.query(&quot;&quot;&quot;
+  (
+    node
+      [&quot;amenity&quot;=&quot;fire_station&quot;]
+      (50.6,7.0,50.8,7.3);
+    way
+      [&quot;amenity&quot;=&quot;fire_station&quot;]
+      (50.6,7.0,50.8,7.3);
+    rel
+      [&quot;amenity&quot;=&quot;fire_station&quot;]
+      (50.6,7.0,50.8,7.3);
+  );
+  (._;&gt;;);
+  out;
+&quot;&quot;&quot;) |&gt; Overpass.Parser.parse()</code></pre>
+<h3>Get the nodes for a way</h3>
+<pre><code class="elixir">{:ok, %Overpass.Response{nodes: nodes, ways: ways, relations: _relations}} = Overpass.API.query(&quot;&quot;&quot;
+  (
+    node
+      [&quot;amenity&quot;=&quot;fire_station&quot;]
+      (50.6,7.0,50.8,7.3);
+    way
+      [&quot;amenity&quot;=&quot;fire_station&quot;]
+      (50.6,7.0,50.8,7.3);
+    rel
+      [&quot;amenity&quot;=&quot;fire_station&quot;]
+      (50.6,7.0,50.8,7.3);
+  );
+  (._;&gt;;);
+  out;
+&quot;&quot;&quot;) |&gt; Overpass.Parser.parse()
+
+# Get nodes for the way from the responded nodes
+list_with_nodes = Overpass.Way.get_nodes(nodes, List.first(ways))
+
+# Get all nodes for the way (new Overpass.Query)
+list_with_nodes = Overpass.Way.get_nodes(nodes, List.first(ways), true)</code></pre>
+<h2 id="Helper"> Helper</h2><p>TODO</p>
+<h1>License</h1>
+<p>The MIT License (MIT)</p>
+
+    <footer class="footer">
+      <p>
+        <span class="line">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.10.0),
+        </span>
+        <span class="line">
+          designed by
+          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+      </p>
+    </footer>
+  </div>
+</section>
+</div>
+    <script src="dist/app.js"></script>
+  </body>
+</html>
+
